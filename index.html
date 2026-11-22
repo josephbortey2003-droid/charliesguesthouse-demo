@@ -9,226 +9,282 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600;0,9..144,800;1,9..144,600&family=Manrope:wght@400;500;600;700;800&display=swap">
 <style>
-/* No logo or brand found: colours are my choice, taken from THEIR own photos (golden-yellow walls and curtains,
-   espresso leather sofas) and the warm evening mood of their WhatsApp cover (gold light, bougainvillea pink).
-   Layout adapted from Habitline (template-library): blurred warm-photo hero, pill nav, one crisp card; plus a
-   landmark "how to find us" map because guests praise how easy it is to locate. Single light theme. */
+/* No logo/brand found: palette sampled from THEIR photos (golden curtains and walls, espresso leather, pink flowers).
+   v2 after self-audit: sharp full-photo hero (no blur), room picker with "from GH₵" placeholders, swipe gallery +
+   lightbox, icon amenity strip with real listing details, good-to-know facts, nearby distances, real Google map,
+   key-and-door mark, scroll reveal. Single light theme. */
 :root {
-  --gold: #f2b331;
-  --gold-soft: #fff1cc;
-  --honey: #f7d77a;
-  --espresso: #2b1d14;
-  --cocoa: #5b4636;
-  --pink: #d6336c;
-  --pink-soft: #fde4ee;
-  --cream: #fffaf0;
-  --paper: #ffffff;
-  --line: #efe3cc;
-  --mute: #7a6a5c;
-  --serif: "Fraunces", Georgia, serif;
-  --sans: "Manrope", "Segoe UI", system-ui, sans-serif;
+  --gold: #f2b331; --gold-deep: #c98a12; --gold-soft: #fff1cc; --honey: #f7d77a;
+  --espresso: #2b1d14; --cocoa: #5b4636; --pink: #d6336c; --pink-soft: #fde4ee;
+  --cream: #fffaf0; --paper: #fff; --line: #efe3cc; --mute: #7a6a5c;
+  --serif: "Fraunces", Georgia, serif; --sans: "Manrope", "Segoe UI", system-ui, sans-serif;
   color-scheme: light;
 }
 * { box-sizing: border-box; }
-body { background: var(--cream); color: var(--espresso); font: 400 16px/1.65 var(--sans); overflow-x: hidden; }
+html { scroll-behavior: smooth; }
+body { margin: 0; background: var(--cream); color: var(--espresso); font: 400 16px/1.65 var(--sans); overflow-x: hidden; }
 img { display: block; max-width: 100%; }
 a { color: inherit; }
 :focus-visible { outline: 3px solid var(--pink); outline-offset: 3px; border-radius: 6px; }
 .wrap { max-width: 1180px; margin: 0 auto; padding-left: max(18px, env(safe-area-inset-left, 0px)); padding-right: max(18px, env(safe-area-inset-right, 0px)); }
 h1, h2, h3 { font-family: var(--serif); font-weight: 800; letter-spacing: -.015em; }
 em { font-family: var(--serif); font-style: italic; font-weight: 600; color: var(--pink); }
-
 .demo { background: var(--espresso); color: var(--honey); font-size: 13px; text-align: center; padding: 8px 12px; }
 
-/* wordmark (my design, no logo exists) */
-.mark { display: inline-flex; flex-direction: column; line-height: 1; text-decoration: none; }
-.mark b { font: italic 600 30px/1 var(--serif); color: var(--espresso); }
-.mark b span { color: var(--pink); }
-.mark small { font: 800 10.5px/1 var(--sans); letter-spacing: .38em; color: var(--cocoa); margin-top: 5px; }
+.mark { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; }
+.mark svg { width: 40px; height: 40px; flex: none; }
+.mark span { display: flex; flex-direction: column; line-height: 1; }
+.mark b { font: italic 600 26px/1 var(--serif); }
+.mark small { font: 800 9.5px/1 var(--sans); letter-spacing: .36em; color: var(--cocoa); margin-top: 5px; }
 
-/* HERO (Habitline) */
-.hero { position: relative; margin: 14px max(14px, env(safe-area-inset-left, 0px)) 0; border-radius: 32px; overflow: hidden; isolation: isolate; padding: 18px 18px 46px; }
-.hero > .bg { position: absolute; inset: -30px; background: url(img/blur.webp) center/cover; z-index: -2; }
-.hero::before { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(255,246,220,.82) 0%, rgba(255,241,204,.62) 45%, rgba(242,179,49,.18) 100%); z-index: -1; }
-.pill { display: flex; align-items: center; justify-content: space-between; gap: 14px; background: rgba(255,250,240,.88); backdrop-filter: blur(12px); border-radius: 999px; padding: 10px 10px 10px 24px; max-width: 1080px; margin: 0 auto; }
-.pill nav { display: flex; gap: 24px; font-weight: 700; font-size: 14.5px; }
-.pill nav a { text-decoration: none; }
-.pill nav a:hover { color: var(--pink); }
-.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; font: 800 15px/1 var(--sans); padding: 14px 22px; border-radius: 999px; border: 2px solid var(--espresso); background: var(--espresso); color: var(--cream); text-decoration: none; cursor: pointer; }
-.btn:hover { background: var(--pink); border-color: var(--pink); }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; font: 800 15px/1 var(--sans); padding: 14px 22px; border-radius: 999px; border: 2px solid var(--espresso); background: var(--espresso); color: var(--cream); text-decoration: none; cursor: pointer; transition: background .2s, color .2s, border-color .2s, transform .2s; }
+.btn:hover { background: var(--pink); border-color: var(--pink); transform: translateY(-1px); }
 .btn.gold { background: var(--gold); border-color: var(--gold); color: var(--espresso); }
 .btn.gold:hover { background: var(--espresso); border-color: var(--espresso); color: var(--cream); }
-.btn.ghost { background: rgba(255,250,240,.6); color: var(--espresso); }
+.btn.ghost { background: rgba(255,250,240,.75); color: var(--espresso); }
 .btn.ghost:hover { background: var(--espresso); color: var(--cream); }
-.hero-in { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; align-items: center; max-width: 1080px; margin: 54px auto 0; }
+
+.hero { position: relative; margin: 14px max(14px, env(safe-area-inset-left, 0px)) 0; border-radius: 32px; overflow: hidden; min-height: min(86vh, 780px); display: flex; flex-direction: column; isolation: isolate; }
+.hero > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 60% 50%; z-index: -2; transform: scale(1.04); animation: drift 18s ease-in-out infinite alternate; }
+@keyframes drift { to { transform: scale(1.1) translateX(-1.5%); } }
+.hero::before { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(90deg, rgba(255,246,222,.96) 0%, rgba(255,241,204,.88) 34%, rgba(242,179,49,.25) 62%, rgba(43,29,20,0) 100%); }
+.pill { display: flex; align-items: center; justify-content: space-between; gap: 14px; background: rgba(255,250,240,.92); backdrop-filter: blur(12px); border-radius: 999px; padding: 8px 8px 8px 16px; margin: 16px; }
+.pill nav { display: flex; gap: 24px; font-weight: 700; font-size: 14.5px; }
+.pill nav a { text-decoration: none; } .pill nav a:hover { color: var(--pink); }
+.hero-in { flex: 1; display: flex; align-items: center; padding: 20px 56px 60px; }
+.hero-in > div { max-width: 560px; }
 .badge { display: inline-flex; align-items: center; gap: 8px; background: var(--espresso); color: var(--honey); font: 800 12.5px/1 var(--sans); letter-spacing: .08em; text-transform: uppercase; padding: 9px 14px; border-radius: 999px; }
 .badge i { width: 8px; height: 8px; border-radius: 50%; background: #58d68d; box-shadow: 0 0 0 4px rgba(88,214,141,.25); }
-.hero h1 { font-size: clamp(44px, 6vw, 82px); line-height: .98; margin: 18px 0 16px; }
+.hero h1 { font-size: clamp(44px, 6vw, 84px); line-height: .97; margin: 18px 0 16px; }
 .hero p { font-size: 18.5px; color: var(--cocoa); max-width: 42ch; margin: 0 0 24px; }
 .ctas { display: flex; gap: 10px; flex-wrap: wrap; }
-.photo { position: relative; }
-.photo img { width: 100%; height: auto; aspect-ratio: 4 / 3.4; object-fit: cover; border-radius: 26px; border: 8px solid var(--paper); box-shadow: 0 30px 60px rgba(43,29,20,.3); transform: rotate(2deg); }
-.note { position: absolute; left: -18px; bottom: -22px; background: var(--paper); border-radius: 18px; padding: 14px 16px; box-shadow: 0 16px 34px rgba(43,29,20,.18); max-width: 250px; transform: rotate(-3deg); }
-.note b { display: block; font: 800 22px/1 var(--serif); color: var(--pink); }
-.note span { font-size: 13.5px; color: var(--mute); }
-.stars { display: inline-block; margin-top: 22px; font-size: 14px; color: var(--espresso); background: rgba(255,250,240,.85); padding: 8px 14px; border-radius: 999px; font-weight: 600; }
-.stars b { font: 800 20px/1 var(--serif); color: var(--espresso); }
-.stars i { font-style: normal; color: var(--gold); letter-spacing: 2px; }
+.trust { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 24px; }
+.trust span { background: rgba(255,250,240,.9); border-radius: 999px; padding: 8px 14px; font-weight: 700; font-size: 14px; }
+.trust b { font-family: var(--serif); }
+.trust i { font-style: normal; color: var(--gold-deep); }
+.float { position: absolute; right: 34px; bottom: 70px; background: var(--paper); border-radius: 20px; padding: 14px 18px; box-shadow: 0 20px 40px rgba(43,29,20,.25); display: flex; gap: 12px; align-items: center; }
+.float svg { width: 40px; height: 40px; padding: 9px; border-radius: 12px; background: var(--gold-soft); color: var(--gold-deep); }
+.float b { display: block; font: 800 18px/1.1 var(--serif); }
+.float small { color: var(--mute); font-size: 13px; }
 
-/* booking card */
-.bookcard { position: relative; z-index: 2; max-width: 1080px; margin: -30px auto 0; background: var(--paper); border-radius: 26px; box-shadow: 0 24px 50px rgba(43,29,20,.14); padding: 18px; display: grid; grid-template-columns: repeat(3, 1fr) auto; gap: 12px; align-items: end; border: 1px solid var(--line); }
+.bookcard { position: relative; z-index: 2; max-width: 1080px; margin: -34px auto 0; background: var(--paper); border-radius: 26px; box-shadow: 0 24px 50px rgba(43,29,20,.14); padding: 18px; display: grid; grid-template-columns: 1.2fr 1fr 1fr .8fr auto; gap: 12px; align-items: end; border: 1px solid var(--line); }
 .bookcard label { display: grid; gap: 6px; font: 800 11.5px/1 var(--sans); letter-spacing: .1em; text-transform: uppercase; color: var(--mute); padding: 4px 6px; }
-.bookcard input, .bookcard select { font: 600 16px/1.3 var(--sans); color: var(--espresso); padding: 12px 13px; border-radius: 14px; border: 1px solid var(--line); background: var(--cream); }
+.bookcard input, .bookcard select { font: 600 16px/1.3 var(--sans); color: var(--espresso); padding: 12px 13px; border-radius: 14px; border: 1px solid var(--line); background: var(--cream); width: 100%; }
 .bookcard .btn { height: 50px; }
 .small { font-size: 13.5px; color: var(--mute); text-align: center; margin: 12px 0 0; }
 
-section { padding-block: 96px; }
+section { padding-block: 92px; }
 .eyebrow { font: 800 12.5px/1 var(--sans); letter-spacing: .18em; text-transform: uppercase; color: var(--pink); margin: 0 0 14px; }
 h2 { font-size: clamp(34px, 4.4vw, 56px); line-height: 1; margin: 0; }
-.sub { color: var(--cocoa); font-size: 17.5px; max-width: 52ch; margin: 14px 0 0; }
+.sub { color: var(--cocoa); font-size: 17.5px; max-width: 54ch; margin: 14px 0 0; }
+.head { display: flex; justify-content: space-between; align-items: end; gap: 20px; flex-wrap: wrap; margin-bottom: 36px; }
 
-/* in every room */
-.room-grid { display: grid; grid-template-columns: 1.1fr .9fr; gap: 26px; align-items: center; margin-top: 44px; }
-.room-grid img { width: 100%; aspect-ratio: 4 / 3.3; object-fit: cover; border-radius: 28px 28px 28px 120px; }
-.amen { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-.amen div { background: var(--paper); border: 1px solid var(--line); border-radius: 18px; padding: 16px; display: flex; gap: 12px; align-items: center; font-weight: 700; }
-.amen svg { flex: 0 0 38px; width: 38px; height: 38px; padding: 8px; border-radius: 12px; background: var(--gold-soft); color: var(--cocoa); }
-.amen div:nth-child(3n+2) svg { background: var(--pink-soft); color: var(--pink); }
-.big8 { display: flex; align-items: baseline; gap: 12px; margin: 0 0 18px; }
-.big8 b { font: 800 84px/0.9 var(--serif); color: var(--gold); -webkit-text-stroke: 2px var(--espresso); }
-.big8 span { font-weight: 700; color: var(--cocoa); max-width: 14ch; line-height: 1.3; }
+.amen { display: grid; grid-template-columns: repeat(6, 1fr); background: var(--paper); border: 1px solid var(--line); border-radius: 26px; overflow: hidden; }
+.amen div { padding: 24px 18px; text-align: center; border-right: 1px solid var(--line); }
+.amen div:last-child { border-right: 0; }
+.amen svg { width: 54px; height: 54px; margin: 0 auto 12px; display: block; }
+.amen b { display: block; font-weight: 800; font-size: 15.5px; }
+.amen small { display: block; color: var(--mute); font-size: 13px; line-height: 1.4; margin-top: 4px; }
 
-/* lounge band */
+.rooms { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.room { background: var(--paper); border: 1px solid var(--line); border-radius: 28px; overflow: hidden; display: flex; flex-direction: column; transition: transform .3s, box-shadow .3s; }
+.room:hover { transform: translateY(-4px); box-shadow: 0 24px 50px rgba(43,29,20,.12); }
+.room .pic { position: relative; aspect-ratio: 16 / 10; overflow: hidden; }
+.room .pic img { width: 100%; height: 100%; object-fit: cover; transition: transform .7s ease; }
+.room:hover .pic img { transform: scale(1.06); }
+.room .tag { position: absolute; top: 14px; left: 14px; background: var(--gold); color: var(--espresso); font: 800 12px/1 var(--sans); letter-spacing: .06em; text-transform: uppercase; padding: 8px 12px; border-radius: 999px; }
+.room .body { padding: 22px 24px 24px; display: flex; flex-direction: column; flex: 1; }
+.room h3 { font-size: 28px; margin: 0 0 6px; }
+.room p { color: var(--cocoa); margin: 0 0 14px; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 18px; }
+.chips span { background: var(--gold-soft); color: var(--cocoa); border-radius: 999px; padding: 5px 11px; font-size: 13px; font-weight: 700; }
+.price { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: auto; border-top: 1px dashed var(--line); padding-top: 16px; flex-wrap: wrap; }
+.price b { font: 800 26px/1 var(--serif); } .price b small { font: 600 14px var(--sans); color: var(--mute); }
+.price i { display: block; font-style: normal; font-size: 12px; color: var(--mute); }
+
+.strip { display: flex; gap: 14px; overflow-x: auto; scroll-snap-type: x mandatory; padding: 4px 4px 18px; scrollbar-width: thin; }
+.strip button { flex: 0 0 auto; height: 340px; border: 0; padding: 0; border-radius: 22px; overflow: hidden; cursor: zoom-in; scroll-snap-align: start; background: #ddd; }
+.strip img { height: 100%; width: auto; max-width: none; transition: transform .6s ease; }
+.strip button:hover img { transform: scale(1.04); }
+.arrows { display: flex; gap: 8px; }
+.arrows button { width: 48px; height: 48px; border-radius: 50%; border: 2px solid var(--espresso); background: transparent; font-size: 20px; cursor: pointer; }
+.arrows button:hover { background: var(--espresso); color: var(--cream); }
+dialog.lb { border: 0; padding: 0; background: transparent; max-width: 92vw; max-height: 90vh; overflow: visible; }
+dialog.lb::backdrop { background: rgba(20,12,6,.88); }
+dialog.lb img { max-width: 92vw; max-height: 84vh; border-radius: 18px; }
+dialog.lb button { position: fixed; top: 18px; right: 18px; width: 46px; height: 46px; border-radius: 50%; border: 0; background: var(--paper); font-size: 20px; cursor: pointer; }
+
 .lounge { background: var(--espresso); color: var(--cream); border-radius: 36px; margin-inline: max(14px, env(safe-area-inset-left, 0px)); overflow: hidden; display: grid; grid-template-columns: 1fr 1fr; }
 .lounge img { width: 100%; height: 100%; object-fit: cover; min-height: 420px; }
-.lounge > div { padding: 64px 56px; align-self: center; }
-.lounge h2 { color: var(--cream); }
-.lounge h2 em { color: var(--honey); }
+.lounge > div { padding: 60px 54px; align-self: center; }
+.lounge h2 { color: var(--cream); } .lounge h2 em { color: var(--honey); }
 .lounge p { color: #e8d9c4; font-size: 17.5px; margin: 16px 0 24px; }
-.lounge ul { list-style: none; padding: 0; margin: 0 0 26px; display: grid; gap: 10px; }
-.lounge li { padding-left: 28px; position: relative; }
-.lounge li::before { content: ""; position: absolute; left: 0; top: .45em; width: 14px; height: 14px; border-radius: 50%; background: var(--gold); }
+.facts { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 26px; }
+.facts div { background: rgba(255,255,255,.07); border-radius: 16px; padding: 14px 16px; }
+.facts small { display: block; color: var(--honey); font: 800 11px/1 var(--sans); letter-spacing: .12em; text-transform: uppercase; margin-bottom: 6px; }
+.facts b { font-size: 16px; }
 
-/* reviews */
-.quotes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 40px; }
-blockquote { margin: 0; background: var(--paper); border: 1px solid var(--line); border-radius: 24px; padding: 28px; position: relative; }
-blockquote:nth-child(2) { background: var(--gold-soft); border-color: var(--gold-soft); transform: translateY(18px); }
+.quotes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+blockquote { margin: 0; background: var(--paper); border: 1px solid var(--line); border-radius: 24px; padding: 28px; }
+blockquote:nth-child(2) { background: var(--gold-soft); border-color: var(--gold-soft); }
+blockquote .st { color: var(--gold-deep); letter-spacing: 2px; margin-bottom: 10px; }
 blockquote p { margin: 0 0 18px; font: italic 600 20px/1.4 var(--serif); }
 blockquote cite { font-style: normal; font-weight: 800; font-size: 14px; color: var(--cocoa); }
 
-/* map */
 .find { display: grid; grid-template-columns: .9fr 1.1fr; gap: 40px; align-items: center; }
-.mapcard { background: var(--paper); border: 1px solid var(--line); border-radius: 30px; padding: 16px; box-shadow: 0 20px 40px rgba(43,29,20,.08); }
-.mapcard svg { width: 100%; height: auto; display: block; border-radius: 20px; }
-.lines { display: grid; gap: 10px; margin: 18px 0 24px; font-size: 17px; }
-.lines b { color: var(--espresso); }
+.near { display: grid; gap: 10px; margin: 22px 0 24px; }
+.near div { display: flex; justify-content: space-between; align-items: center; gap: 12px; background: var(--paper); border: 1px solid var(--line); border-radius: 16px; padding: 14px 18px; font-weight: 700; }
+.near small { background: var(--gold-soft); border-radius: 999px; padding: 5px 11px; font-size: 13px; color: var(--cocoa); white-space: nowrap; }
+.map { border-radius: 30px; overflow: hidden; border: 8px solid var(--paper); box-shadow: 0 20px 40px rgba(43,29,20,.1); aspect-ratio: 4 / 3.2; background: #efe6d4; }
+.map iframe { width: 100%; height: 100%; border: 0; display: block; }
 
 footer { background: var(--espresso); color: #d9c7ae; padding-block: 44px 110px; margin-top: 40px; }
 footer .wrap { display: flex; justify-content: space-between; gap: 18px; flex-wrap: wrap; align-items: center; }
-footer .mark b { color: var(--cream); }
-footer .mark small { color: var(--honey); }
+footer .mark b { color: var(--cream); } footer .mark small { color: var(--honey); }
 
 .dock { position: fixed; left: 0; right: 0; bottom: 0; display: none; gap: 8px; padding: 10px max(14px, env(safe-area-inset-right, 0px)) calc(10px + env(safe-area-inset-bottom, 0px)) max(14px, env(safe-area-inset-left, 0px)); background: rgba(255,250,240,.95); backdrop-filter: blur(8px); border-top: 1px solid var(--line); z-index: 8; }
 .dock .btn { flex: 1; }
 
-@media (max-width: 960px) {
-  .hero-in, .room-grid, .lounge, .find { grid-template-columns: 1fr; }
-  .photo { max-width: 560px; }
+.rv { opacity: 0; transform: translateY(26px); transition: opacity .7s ease, transform .7s ease; }
+.rv.in { opacity: 1; transform: none; }
+
+@media (max-width: 1000px) {
+  .amen { grid-template-columns: repeat(3, 1fr); }
+  .amen div:nth-child(3) { border-right: 0; } .amen div:nth-child(-n+3) { border-bottom: 1px solid var(--line); }
   .bookcard { grid-template-columns: 1fr 1fr; margin-inline: 14px; }
   .bookcard .btn { grid-column: span 2; }
+  .lounge, .find { grid-template-columns: 1fr; }
+  .lounge > div { padding: 40px 26px; } .lounge img { min-height: 260px; }
   .quotes { grid-template-columns: 1fr; }
-  blockquote:nth-child(2) { transform: none; }
-  .lounge > div { padding: 40px 26px; }
-  .lounge img { min-height: 260px; }
 }
 @media (max-width: 760px) {
   .pill nav { display: none; }
-  .pill { padding-left: 18px; }
-  .hero { padding-bottom: 54px; }
-  .hero-in { margin-top: 34px; }
+  .hero { min-height: 700px; }
+  .hero::before { background: linear-gradient(180deg, rgba(255,246,222,.35) 0%, rgba(255,241,204,.9) 40%, rgba(255,241,204,.97) 100%); }
+  .hero > img { object-position: 70% 20%; }
+  .hero-in { padding: 10px 22px 120px; align-items: flex-end; }
+  .float { left: 22px; right: auto; bottom: 22px; }
+  .rooms { grid-template-columns: 1fr; }
+  .strip button { height: 240px; }
   section { padding-block: 64px; }
   .dock { display: flex; }
 }
 @media (max-width: 480px) {
-  .bookcard { grid-template-columns: 1fr; }
-  .bookcard .btn { grid-column: auto; }
-  .amen { grid-template-columns: 1fr; }
-  .note { left: 8px; }
+  .bookcard { grid-template-columns: 1fr; } .bookcard .btn { grid-column: auto; }
+  .amen { grid-template-columns: 1fr 1fr; }
+  .amen div { border-right: 1px solid var(--line) !important; border-bottom: 1px solid var(--line); }
+  .amen div:nth-child(2n) { border-right: 0 !important; }
+  .facts { grid-template-columns: 1fr; }
   .pill .btn { padding: 12px 16px; font-size: 14px; }
+  .mark b { font-size: 22px; }
 }
+@media (prefers-reduced-motion: reduce) { *, *::before { animation: none !important; transition: none !important; } .rv { opacity: 1; transform: none; } html { scroll-behavior: auto; } }
 </style>
 <style>body{margin:0}</style>
 </head>
 <body>
 
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<symbol id="key" viewBox="0 0 40 40"><rect x="1" y="1" width="38" height="38" rx="12" fill="#2b1d14"/><path d="M12 31V14a8 8 0 0116 0v17z" fill="#f2b331"/><circle cx="20" cy="17" r="3.2" fill="#2b1d14"/><path d="M18.8 19.5h2.4l.8 6h-4z" fill="#2b1d14"/><circle cx="31" cy="9" r="3" fill="#d6336c"/></symbol>
+</defs></svg>
+
 <div class="demo">Demo website made for Charlie's Guest House. Prices and final details to be confirmed by you.</div>
 
 <div class="hero" id="top">
-  <div class="bg" aria-hidden="true"></div>
+  <img src="img/hero.webp" alt="Charlie's Guest House bedroom with golden curtains, air-conditioning and a flowered bedspread" width="1280" height="960">
   <div class="pill">
-    <a class="mark" href="#top" aria-label="Charlie's Guest House home"><b>Charlie<span>'</span>s</b><small>GUEST HOUSE</small></a>
-    <nav aria-label="Sections"><a href="#rooms">Rooms</a><a href="#lounge">Lounge</a><a href="#reviews">Reviews</a><a href="#find">Find us</a></nav>
+    <a class="mark" href="#top" aria-label="Charlie's Guest House home"><svg><use href="#key"/></svg><span><b>Charlie's</b><small>GUEST HOUSE</small></span></a>
+    <nav aria-label="Sections"><a href="#rooms">Rooms</a><a href="#gallery">Photos</a><a href="#stay">Your stay</a><a href="#reviews">Reviews</a><a href="#find">Find us</a></nav>
     <a class="btn" href="#book">Book a room</a>
   </div>
   <div class="hero-in">
-    <div>
+    <div class="rv">
       <span class="badge"><i></i>Open 24 hours · Chantan, Accra</span>
       <h1>Rest easy, <em>right</em> where you need to be.</h1>
-      <p>Neat, quiet and affordable rooms near Chantan Market, just minutes from Achimota Mall. Breakfast on request, free parking, and a team that's up 24/7.</p>
-      <div class="ctas">
-        <a class="btn gold" href="#book">Check your dates</a>
-        <a class="btn ghost" href="tel:+233204137091">Call 020 413 7091</a>
-      </div>
-      <div class="stars"><b>4.2</b> <i>★★★★★</i> &nbsp;51 reviews on Google</div>
-    </div>
-    <div class="photo">
-      <img src="img/room-gold.webp" alt="A Charlie's Guest House bedroom with golden curtains, air-conditioning and a wall TV" width="1126" height="960">
-      <div class="note"><b>8 rooms</b><span>each with AC, TV, fridge and microwave</span></div>
+      <p>Neat, quiet and affordable rooms beside Chantan Market, minutes from Achimota Mall. Breakfast on request, free parking, and a team that's up 24/7.</p>
+      <div class="ctas"><a class="btn gold" href="#book">Check your dates</a><a class="btn ghost" href="tel:+233204137091">Call 020 413 7091</a></div>
+      <div class="trust"><span><b>4.2</b> <i>★★★★★</i> 51 Google reviews</span><span>8 rooms</span></div>
     </div>
   </div>
+  <div class="float rv"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 21V9l9-6 9 6v12"/><path d="M9 21v-6h6v6"/></svg><div><b>Check-in from 2 pm</b><small>Late arrival? We're open 24/7</small></div></div>
 </div>
 
 <form class="bookcard" id="book" aria-label="Book a room">
+  <label>Room<select name="room"><option>Any available room</option><option>The Golden Room</option><option>The Classic Room</option></select></label>
   <label>Check-in<input type="date" name="in" required></label>
   <label>Check-out<input type="date" name="out" required></label>
-  <label>Guests<select name="guests"><option>1 guest</option><option selected>2 guests</option><option>3 guests</option><option>4+ guests</option></select></label>
+  <label>Guests<select name="guests"><option>1</option><option selected>2</option><option>3</option></select></label>
   <button class="btn" type="submit">Send on WhatsApp</button>
 </form>
 <p class="small">We reply on WhatsApp with your rate and confirm your room.</p>
 
-<section id="rooms">
+<section>
   <div class="wrap">
-    <p class="eyebrow">In every room</p>
-    <h2>Small and <em>cosy</em>, with all you need.</h2>
-    <div class="room-grid">
-      <img src="img/room-night.webp" alt="Double bed with dark headboard, air-conditioner and a small rug" loading="lazy">
-      <div>
-        <div class="big8"><b>8</b><span>neatly dressed rooms, each one quiet</span></div>
-        <div class="amen">
-          <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 8h18M3 8v5h18V8M7 16l-1 3M12 16v3M17 16l1 3"/></svg>Air-conditioning</div>
-          <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="5" width="18" height="12" rx="2"/><path d="M8 21h8"/></svg>Flat-screen TV</div>
-          <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="6" y="2" width="12" height="20" rx="2"/><path d="M6 10h12M9 6v1M9 13v2"/></svg>Fridge</div>
-          <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="5" width="20" height="14" rx="2"/><rect x="5" y="8" width="10" height="8" rx="1"/><path d="M18 9v.5M18 12v.5"/></svg>Microwave</div>
-          <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 11h15a3 3 0 010 6H3zM6 11V7M10 11V5M14 11V8"/></svg>Breakfast on request</div>
-          <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="4"/><path d="M9 17V7h4a3 3 0 010 6H9"/></svg>Free parking</div>
-        </div>
-      </div>
+    <div class="amen rv">
+      <div><svg viewBox="0 0 56 56"><circle cx="28" cy="28" r="26" fill="#fff1cc"/><rect x="13" y="20" width="30" height="11" rx="3" fill="#fff" stroke="#2b1d14" stroke-width="2.4"/><path d="M18 36l-2 5M28 36v5M38 36l2 5" stroke="#2fa7e0" stroke-width="2.6" stroke-linecap="round"/></svg><b>Air-conditioning</b><small>in every room</small></div>
+      <div><svg viewBox="0 0 56 56"><circle cx="28" cy="28" r="26" fill="#fde4ee"/><rect x="13" y="16" width="30" height="20" rx="3" fill="#2b1d14"/><rect x="16" y="19" width="24" height="14" rx="1.5" fill="#f7d77a"/><path d="M23 41h10" stroke="#2b1d14" stroke-width="2.6" stroke-linecap="round"/></svg><b>Flat-screen TV</b><small>in every room</small></div>
+      <div><svg viewBox="0 0 56 56"><circle cx="28" cy="28" r="26" fill="#fff1cc"/><rect x="19" y="12" width="18" height="32" rx="3" fill="#fff" stroke="#2b1d14" stroke-width="2.4"/><path d="M19 24h18M23 17v3M23 28v5" stroke="#2b1d14" stroke-width="2.4" stroke-linecap="round"/></svg><b>Fridge &amp; microwave</b><small>keep and warm your food</small></div>
+      <div><svg viewBox="0 0 56 56"><circle cx="28" cy="28" r="26" fill="#fde4ee"/><path d="M14 30h24a6 6 0 010 12H14z" fill="#fff" stroke="#2b1d14" stroke-width="2.4"/><path d="M18 26c0-3 3-3 3-6M24 26c0-3 3-3 3-6M30 26c0-3 3-3 3-6" stroke="#d6336c" stroke-width="2.4" stroke-linecap="round" fill="none"/></svg><b>Breakfast</b><small>on request, 7–9 am</small></div>
+      <div><svg viewBox="0 0 56 56"><circle cx="28" cy="28" r="26" fill="#fff1cc"/><rect x="15" y="15" width="26" height="26" rx="7" fill="#2fa7e0"/><path d="M24 34V22h5a4 4 0 010 8h-5" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round"/></svg><b>Free parking</b><small>on site</small></div>
+      <div><svg viewBox="0 0 56 56"><circle cx="28" cy="28" r="26" fill="#fde4ee"/><circle cx="28" cy="28" r="13" fill="#fff" stroke="#2b1d14" stroke-width="2.4"/><path d="M28 21v7l5 3" stroke="#d6336c" stroke-width="2.6" stroke-linecap="round" fill="none"/></svg><b>Open 24 hours</b><small>arrive any time</small></div>
     </div>
   </div>
 </section>
 
-<section id="lounge" style="padding-top:0">
-  <div class="lounge">
+<section id="rooms" style="padding-top:0">
+  <div class="wrap">
+    <div class="head rv"><div><p class="eyebrow">Pick your room</p><h2>Small, <em>cosy</em> and spotless.</h2><p class="sub">8 neatly dressed rooms. Here are two of them. Tap one to start your booking.</p></div></div>
+    <div class="rooms">
+      <article class="room rv">
+        <div class="pic"><img src="img/room-gold.webp" alt="Bright room with golden curtains, double bed, desk and wall TV" loading="lazy"><span class="tag">Bright &amp; sunny</span></div>
+        <div class="body">
+          <h3>The Golden Room</h3>
+          <p>Sunny and bright, with golden curtains, a comfy double bed and a small desk.</p>
+          <div class="chips"><span>Double bed</span><span>AC</span><span>TV</span><span>Desk</span><span>Fridge</span></div>
+          <div class="price"><div><b>GH₵ — <small>/ night</small></b><i>Rate to be confirmed by Charlie's</i></div><button class="btn" type="button" data-room="The Golden Room">Book this room</button></div>
+        </div>
+      </article>
+      <article class="room rv">
+        <div class="pic"><img src="img/room-night.webp" alt="Classic room with dark wood headboard, double bed and air-conditioning" loading="lazy" style="object-position:50% 35%"><span class="tag">Quiet &amp; calm</span></div>
+        <div class="body">
+          <h3>The Classic Room</h3>
+          <p>Warm dark wood, soft lighting and a big double bed for a deep night's sleep.</p>
+          <div class="chips"><span>Double bed</span><span>AC</span><span>Side table</span><span>Microwave</span></div>
+          <div class="price"><div><b>GH₵ — <small>/ night</small></b><i>Rate to be confirmed by Charlie's</i></div><button class="btn" type="button" data-room="The Classic Room">Book this room</button></div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="gallery" style="padding-top:0">
+  <div class="wrap">
+    <div class="head rv"><div><p class="eyebrow">Take a look</p><h2>Inside Charlie's.</h2></div><div class="arrows"><button type="button" id="prev" aria-label="Previous photos">←</button><button type="button" id="next" aria-label="Next photos">→</button></div></div>
+    <div class="strip" id="strip">
+      <button type="button"><img src="img/room-gold.webp" alt="The Golden Room" loading="lazy"></button>
+      <button type="button"><img src="img/lounge.webp" alt="Guest lounge with leather sofas" loading="lazy"></button>
+      <button type="button"><img src="img/room-night.webp" alt="The Classic Room" loading="lazy"></button>
+      <button type="button"><img src="img/detail-curtain.webp" alt="Golden curtains and flowers" loading="lazy"></button>
+      <button type="button"><img src="img/lounge-sofas.webp" alt="Lounge sofas" loading="lazy"></button>
+      <button type="button"><img src="img/detail-table.webp" alt="Bedside table and rug" loading="lazy"></button>
+    </div>
+  </div>
+</section>
+<dialog class="lb" id="lb"><img id="lbimg" alt=""><button type="button" id="lbx" aria-label="Close">✕</button></dialog>
+
+<section id="stay" style="padding-top:0">
+  <div class="lounge rv">
     <img src="img/lounge.webp" alt="Bright yellow guest lounge with black leather sofas and a TV" loading="lazy">
     <div>
-      <p class="eyebrow" style="color:var(--honey)">The lounge</p>
-      <h2>A <em>bright</em> place to unwind.</h2>
-      <p>Catch the news, meet your visitors or just relax on the sofas. Our guests call it a cool, quiet environment in the middle of busy Accra.</p>
-      <ul>
-        <li>Quiet, peaceful compound</li>
-        <li>Staff on hand 24 hours a day</li>
-        <li>Easy to find, close to the main road</li>
-      </ul>
+      <p class="eyebrow" style="color:var(--honey)">Good to know</p>
+      <h2>A <em>bright</em>, easy stay.</h2>
+      <p>Relax in the lounge, meet your visitors, or head out. Chantan Market is right next door.</p>
+      <div class="facts">
+        <div><small>Check-in</small><b>From 2 pm</b></div>
+        <div><small>Check-out</small><b>By 12 noon</b></div>
+        <div><small>Breakfast</small><b>On request · 7–9 am</b></div>
+        <div><small>Parking</small><b>Free, on site</b></div>
+      </div>
       <a class="btn gold" href="#book">Book your stay</a>
     </div>
   </div>
@@ -236,66 +292,59 @@ footer .mark small { color: var(--honey); }
 
 <section id="reviews">
   <div class="wrap">
-    <p class="eyebrow">What guests say</p>
-    <h2>4.2 stars from <em>51</em> guests.</h2>
+    <div class="head rv"><div><p class="eyebrow">What guests say</p><h2>4.2 stars from <em>51</em> guests.</h2></div></div>
     <div class="quotes">
-      <blockquote><p>"Beautiful and decent place, rooms neatly dressed. Breakfast upon request at a minimal cost. Quiet environment."</p><cite>J.R. · Google review</cite></blockquote>
-      <blockquote><p>"They have a cool environment. Nice rooms and well situated, easy to locate."</p><cite>Emmanuel · Google review</cite></blockquote>
-      <blockquote><p>"Close to Chantan market. Rooms are quite affordable."</p><cite>De Gem · Google review</cite></blockquote>
+      <blockquote class="rv"><div class="st">★★★★★</div><p>"Beautiful and decent place, rooms neatly dressed. Breakfast upon request at a minimal cost. Quiet environment."</p><cite>J.R. · Google review</cite></blockquote>
+      <blockquote class="rv"><div class="st">★★★★★</div><p>"They have a cool environment. Nice rooms and well situated, easy to locate."</p><cite>Emmanuel · Google review</cite></blockquote>
+      <blockquote class="rv"><div class="st">★★★★☆</div><p>"Close to Chantan market. Rooms are quite affordable."</p><cite>De Gem · Google review</cite></blockquote>
     </div>
   </div>
 </section>
 
 <section id="find" style="padding-top:40px">
   <div class="wrap find">
-    <div>
+    <div class="rv">
       <p class="eyebrow">Find us</p>
-      <h2>Easy to <em>find</em>, easy to love.</h2>
-      <div class="lines">
-        <span>📍 Chantan, off Nii Okaiman West Main Road, Accra</span>
-        <span>🛒 Next to Chantan Market · minutes from Achimota Mall</span>
-        <span>📞 <b>020 413 7091</b> · open 24 hours</span>
+      <h2>Easy to <em>find</em>, close to everything.</h2>
+      <div class="near">
+        <div>Chantan Market <small>right next door</small></div>
+        <div>Achimota Mall <small>≈ 5 min drive</small></div>
+        <div>University of Ghana <small>≈ 11 min drive</small></div>
+        <div>Accra Mall <small>≈ 12 min drive</small></div>
       </div>
-      <div class="ctas">
-        <a class="btn" href="https://www.google.com/maps/search/?api=1&query=Charlie%27s%20Guest%20house%20Chantan%20Accra" target="_blank" rel="noopener">Open in Google Maps</a>
-        <a class="btn ghost" href="tel:+233204137091">Call us</a>
-      </div>
+      <div class="ctas"><a class="btn" href="https://www.google.com/maps/search/?api=1&query=Charlie%27s%20Guest%20house%20Chantan%20Accra" target="_blank" rel="noopener">Directions</a><a class="btn ghost" href="tel:+233204137091">Call 020 413 7091</a></div>
     </div>
-    <div class="mapcard">
-      <svg viewBox="0 0 560 380" role="img" aria-label="Simple map: Charlie's Guest House beside Chantan Market, off Nii Okaiman West Main Road, a short drive from Achimota Mall">
-        <rect width="560" height="380" fill="#fff6e3"/>
-        <g stroke="#f0dfbd" stroke-width="2"><path d="M0 60h560M0 140h560M0 230h560M0 320h560M90 0v380M210 0v380M330 0v380M450 0v380"/></g>
-        <path d="M-10 290 C 120 250, 240 230, 330 170 S 500 70, 580 40" fill="none" stroke="#f2b331" stroke-width="22" stroke-linecap="round"/>
-        <path d="M-10 290 C 120 250, 240 230, 330 170 S 500 70, 580 40" fill="none" stroke="#fff" stroke-width="2" stroke-dasharray="10 10"/>
-        <text x="370" y="168" font-family="Manrope, Arial" font-weight="800" font-size="12" fill="#5b4636" transform="rotate(-27 370 168)">NII OKAIMAN WEST MAIN RD</text>
-        <path d="M230 380 L 260 200" stroke="#ecd7ae" stroke-width="12" stroke-linecap="round"/>
-        <g transform="translate(150 250)"><rect x="-38" y="-24" width="76" height="48" rx="10" fill="#fff" stroke="#5b4636" stroke-width="2"/><text x="0" y="-3" text-anchor="middle" font-family="Manrope, Arial" font-weight="800" font-size="12" fill="#2b1d14">Chantan</text><text x="0" y="13" text-anchor="middle" font-family="Manrope, Arial" font-weight="700" font-size="11" fill="#7a6a5c">Market</text></g>
-        <g transform="translate(470 60)"><rect x="-56" y="-22" width="112" height="44" rx="10" fill="#fff" stroke="#5b4636" stroke-width="2"/><text x="0" y="-2" text-anchor="middle" font-family="Manrope, Arial" font-weight="800" font-size="12" fill="#2b1d14">To Achimota Mall</text><text x="0" y="13" text-anchor="middle" font-family="Manrope, Arial" font-weight="700" font-size="11" fill="#7a6a5c">a short drive →</text></g>
-        <g transform="translate(268 222)"><circle r="34" fill="#d6336c" opacity=".15"><animate attributeName="r" values="22;40;22" dur="2.6s" repeatCount="indefinite"/></circle><path d="M0 18 C -14 2, -20 -6, -20 -16 a20 20 0 0 1 40 0 c0 10 -6 18 -20 34z" fill="#d6336c"/><circle cy="-16" r="7" fill="#fff"/></g>
-        <g transform="translate(318 300)"><rect x="-10" y="-26" width="196" height="52" rx="14" fill="#2b1d14"/><text x="88" y="-4" text-anchor="middle" font-family="Fraunces, Georgia" font-style="italic" font-weight="600" font-size="17" fill="#f7d77a">Charlie's Guest House</text><text x="88" y="15" text-anchor="middle" font-family="Manrope, Arial" font-weight="700" font-size="11" fill="#e8d9c4">Open 24 hours · 020 413 7091</text></g>
-      </svg>
-    </div>
+    <div class="map rv"><iframe title="Map showing Charlie's Guest House in Chantan, Accra" src="https://www.google.com/maps?q=Charlie%27s+Guest+house,+Chantan,+Accra&ll=5.6272466,-0.2560611&z=16&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></div>
   </div>
 </section>
 
-<footer><div class="wrap"><a class="mark" href="#top"><b>Charlie<span>'</span>s</b><small>GUEST HOUSE</small></a><span>Chantan, Accra · 020 413 7091 · Open 24 hours</span></div></footer>
+<footer><div class="wrap"><a class="mark" href="#top"><svg><use href="#key"/></svg><span><b>Charlie's</b><small>GUEST HOUSE</small></span></a><span>Chantan, Accra · 020 413 7091 · Open 24 hours</span></div></footer>
 
-<div class="dock">
-  <a class="btn" href="#book">Book a room</a>
-  <a class="btn ghost" href="tel:+233204137091">Call</a>
-</div>
+<div class="dock"><a class="btn" href="#book">Book a room</a><a class="btn ghost" href="tel:+233204137091">Call</a></div>
 
 <script>
 (() => {
+  const io = 'IntersectionObserver' in window ? new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: .12 }) : null;
+  document.querySelectorAll('.rv').forEach(el => io ? io.observe(el) : el.classList.add('in'));
+
+  const strip = document.getElementById('strip');
+  document.getElementById('next').onclick = () => strip.scrollBy({ left: strip.clientWidth * .8, behavior: 'smooth' });
+  document.getElementById('prev').onclick = () => strip.scrollBy({ left: -strip.clientWidth * .8, behavior: 'smooth' });
+  const lb = document.getElementById('lb'), lbimg = document.getElementById('lbimg');
+  strip.querySelectorAll('button').forEach(b => b.onclick = () => { const i = b.querySelector('img'); lbimg.src = i.src; lbimg.alt = i.alt; lb.showModal(); });
+  document.getElementById('lbx').onclick = () => lb.close();
+  lb.addEventListener('click', e => { if (e.target === lb) lb.close(); });
+
   const f = document.getElementById('book');
   const iso = d => d.toISOString().slice(0, 10);
   f.in.min = iso(new Date()); f.out.min = f.in.min;
   f.in.addEventListener('change', () => { f.out.min = f.in.value; if (f.out.value && f.out.value <= f.in.value) f.out.value = ''; });
+  document.querySelectorAll('[data-room]').forEach(b => b.onclick = () => { f.room.value = b.dataset.room; f.scrollIntoView({ behavior: 'smooth', block: 'center' }); setTimeout(() => f.in.focus(), 600); });
   const fmt = v => new Date(v + 'T00:00').toLocaleDateString('en-GB', { weekday: 'short', day: 'numeric', month: 'short' });
   f.addEventListener('submit', e => {
     e.preventDefault();
     const n = Math.round((new Date(f.out.value) - new Date(f.in.value)) / 864e5);
-    let msg = "Hello Charlie's Guest House! I would like to book a room.\n\nCheck-in: " + fmt(f.in.value) + '\nCheck-out: ' + fmt(f.out.value);
+    let msg = "Hello Charlie's Guest House! I would like to book a room.\n\nRoom: " + f.room.value + '\nCheck-in: ' + fmt(f.in.value) + '\nCheck-out: ' + fmt(f.out.value);
     if (n > 0) msg += ' (' + n + (n === 1 ? ' night' : ' nights') + ')';
     msg += '\nGuests: ' + f.guests.value + '\n\nPlease send me the rate and availability. Thank you!';
     window.open('https://wa.me/233204137091?text=' + encodeURIComponent(msg), '_blank', 'noopener');
