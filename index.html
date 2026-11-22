@@ -1,0 +1,307 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Charlie's Guest House | Chantan, Accra · Quiet, affordable rooms</title>
+<meta name="description" content="Charlie's Guest House, Chantan (Nii Okaiman West), Accra. 8 neat, air-conditioned rooms with TV, fridge and microwave, breakfast on request, free parking, open 24 hours. Minutes from Achimota Mall. Book on WhatsApp.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600;0,9..144,800;1,9..144,600&family=Manrope:wght@400;500;600;700;800&display=swap">
+<style>
+/* No logo or brand found: colours are my choice, taken from THEIR own photos (golden-yellow walls and curtains,
+   espresso leather sofas) and the warm evening mood of their WhatsApp cover (gold light, bougainvillea pink).
+   Layout adapted from Habitline (template-library): blurred warm-photo hero, pill nav, one crisp card; plus a
+   landmark "how to find us" map because guests praise how easy it is to locate. Single light theme. */
+:root {
+  --gold: #f2b331;
+  --gold-soft: #fff1cc;
+  --honey: #f7d77a;
+  --espresso: #2b1d14;
+  --cocoa: #5b4636;
+  --pink: #d6336c;
+  --pink-soft: #fde4ee;
+  --cream: #fffaf0;
+  --paper: #ffffff;
+  --line: #efe3cc;
+  --mute: #7a6a5c;
+  --serif: "Fraunces", Georgia, serif;
+  --sans: "Manrope", "Segoe UI", system-ui, sans-serif;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+body { background: var(--cream); color: var(--espresso); font: 400 16px/1.65 var(--sans); overflow-x: hidden; }
+img { display: block; max-width: 100%; }
+a { color: inherit; }
+:focus-visible { outline: 3px solid var(--pink); outline-offset: 3px; border-radius: 6px; }
+.wrap { max-width: 1180px; margin: 0 auto; padding-left: max(18px, env(safe-area-inset-left, 0px)); padding-right: max(18px, env(safe-area-inset-right, 0px)); }
+h1, h2, h3 { font-family: var(--serif); font-weight: 800; letter-spacing: -.015em; }
+em { font-family: var(--serif); font-style: italic; font-weight: 600; color: var(--pink); }
+
+.demo { background: var(--espresso); color: var(--honey); font-size: 13px; text-align: center; padding: 8px 12px; }
+
+/* wordmark (my design, no logo exists) */
+.mark { display: inline-flex; flex-direction: column; line-height: 1; text-decoration: none; }
+.mark b { font: italic 600 30px/1 var(--serif); color: var(--espresso); }
+.mark b span { color: var(--pink); }
+.mark small { font: 800 10.5px/1 var(--sans); letter-spacing: .38em; color: var(--cocoa); margin-top: 5px; }
+
+/* HERO (Habitline) */
+.hero { position: relative; margin: 14px max(14px, env(safe-area-inset-left, 0px)) 0; border-radius: 32px; overflow: hidden; isolation: isolate; padding: 18px 18px 46px; }
+.hero > .bg { position: absolute; inset: -30px; background: url(img/blur.webp) center/cover; z-index: -2; }
+.hero::before { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(255,246,220,.82) 0%, rgba(255,241,204,.62) 45%, rgba(242,179,49,.18) 100%); z-index: -1; }
+.pill { display: flex; align-items: center; justify-content: space-between; gap: 14px; background: rgba(255,250,240,.88); backdrop-filter: blur(12px); border-radius: 999px; padding: 10px 10px 10px 24px; max-width: 1080px; margin: 0 auto; }
+.pill nav { display: flex; gap: 24px; font-weight: 700; font-size: 14.5px; }
+.pill nav a { text-decoration: none; }
+.pill nav a:hover { color: var(--pink); }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; font: 800 15px/1 var(--sans); padding: 14px 22px; border-radius: 999px; border: 2px solid var(--espresso); background: var(--espresso); color: var(--cream); text-decoration: none; cursor: pointer; }
+.btn:hover { background: var(--pink); border-color: var(--pink); }
+.btn.gold { background: var(--gold); border-color: var(--gold); color: var(--espresso); }
+.btn.gold:hover { background: var(--espresso); border-color: var(--espresso); color: var(--cream); }
+.btn.ghost { background: rgba(255,250,240,.6); color: var(--espresso); }
+.btn.ghost:hover { background: var(--espresso); color: var(--cream); }
+.hero-in { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; align-items: center; max-width: 1080px; margin: 54px auto 0; }
+.badge { display: inline-flex; align-items: center; gap: 8px; background: var(--espresso); color: var(--honey); font: 800 12.5px/1 var(--sans); letter-spacing: .08em; text-transform: uppercase; padding: 9px 14px; border-radius: 999px; }
+.badge i { width: 8px; height: 8px; border-radius: 50%; background: #58d68d; box-shadow: 0 0 0 4px rgba(88,214,141,.25); }
+.hero h1 { font-size: clamp(44px, 6vw, 82px); line-height: .98; margin: 18px 0 16px; }
+.hero p { font-size: 18.5px; color: var(--cocoa); max-width: 42ch; margin: 0 0 24px; }
+.ctas { display: flex; gap: 10px; flex-wrap: wrap; }
+.photo { position: relative; }
+.photo img { width: 100%; height: auto; aspect-ratio: 4 / 3.4; object-fit: cover; border-radius: 26px; border: 8px solid var(--paper); box-shadow: 0 30px 60px rgba(43,29,20,.3); transform: rotate(2deg); }
+.note { position: absolute; left: -18px; bottom: -22px; background: var(--paper); border-radius: 18px; padding: 14px 16px; box-shadow: 0 16px 34px rgba(43,29,20,.18); max-width: 250px; transform: rotate(-3deg); }
+.note b { display: block; font: 800 22px/1 var(--serif); color: var(--pink); }
+.note span { font-size: 13.5px; color: var(--mute); }
+.stars { display: inline-block; margin-top: 22px; font-size: 14px; color: var(--espresso); background: rgba(255,250,240,.85); padding: 8px 14px; border-radius: 999px; font-weight: 600; }
+.stars b { font: 800 20px/1 var(--serif); color: var(--espresso); }
+.stars i { font-style: normal; color: var(--gold); letter-spacing: 2px; }
+
+/* booking card */
+.bookcard { position: relative; z-index: 2; max-width: 1080px; margin: -30px auto 0; background: var(--paper); border-radius: 26px; box-shadow: 0 24px 50px rgba(43,29,20,.14); padding: 18px; display: grid; grid-template-columns: repeat(3, 1fr) auto; gap: 12px; align-items: end; border: 1px solid var(--line); }
+.bookcard label { display: grid; gap: 6px; font: 800 11.5px/1 var(--sans); letter-spacing: .1em; text-transform: uppercase; color: var(--mute); padding: 4px 6px; }
+.bookcard input, .bookcard select { font: 600 16px/1.3 var(--sans); color: var(--espresso); padding: 12px 13px; border-radius: 14px; border: 1px solid var(--line); background: var(--cream); }
+.bookcard .btn { height: 50px; }
+.small { font-size: 13.5px; color: var(--mute); text-align: center; margin: 12px 0 0; }
+
+section { padding-block: 96px; }
+.eyebrow { font: 800 12.5px/1 var(--sans); letter-spacing: .18em; text-transform: uppercase; color: var(--pink); margin: 0 0 14px; }
+h2 { font-size: clamp(34px, 4.4vw, 56px); line-height: 1; margin: 0; }
+.sub { color: var(--cocoa); font-size: 17.5px; max-width: 52ch; margin: 14px 0 0; }
+
+/* in every room */
+.room-grid { display: grid; grid-template-columns: 1.1fr .9fr; gap: 26px; align-items: center; margin-top: 44px; }
+.room-grid img { width: 100%; aspect-ratio: 4 / 3.3; object-fit: cover; border-radius: 28px 28px 28px 120px; }
+.amen { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.amen div { background: var(--paper); border: 1px solid var(--line); border-radius: 18px; padding: 16px; display: flex; gap: 12px; align-items: center; font-weight: 700; }
+.amen svg { flex: 0 0 38px; width: 38px; height: 38px; padding: 8px; border-radius: 12px; background: var(--gold-soft); color: var(--cocoa); }
+.amen div:nth-child(3n+2) svg { background: var(--pink-soft); color: var(--pink); }
+.big8 { display: flex; align-items: baseline; gap: 12px; margin: 0 0 18px; }
+.big8 b { font: 800 84px/0.9 var(--serif); color: var(--gold); -webkit-text-stroke: 2px var(--espresso); }
+.big8 span { font-weight: 700; color: var(--cocoa); max-width: 14ch; line-height: 1.3; }
+
+/* lounge band */
+.lounge { background: var(--espresso); color: var(--cream); border-radius: 36px; margin-inline: max(14px, env(safe-area-inset-left, 0px)); overflow: hidden; display: grid; grid-template-columns: 1fr 1fr; }
+.lounge img { width: 100%; height: 100%; object-fit: cover; min-height: 420px; }
+.lounge > div { padding: 64px 56px; align-self: center; }
+.lounge h2 { color: var(--cream); }
+.lounge h2 em { color: var(--honey); }
+.lounge p { color: #e8d9c4; font-size: 17.5px; margin: 16px 0 24px; }
+.lounge ul { list-style: none; padding: 0; margin: 0 0 26px; display: grid; gap: 10px; }
+.lounge li { padding-left: 28px; position: relative; }
+.lounge li::before { content: ""; position: absolute; left: 0; top: .45em; width: 14px; height: 14px; border-radius: 50%; background: var(--gold); }
+
+/* reviews */
+.quotes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 40px; }
+blockquote { margin: 0; background: var(--paper); border: 1px solid var(--line); border-radius: 24px; padding: 28px; position: relative; }
+blockquote:nth-child(2) { background: var(--gold-soft); border-color: var(--gold-soft); transform: translateY(18px); }
+blockquote p { margin: 0 0 18px; font: italic 600 20px/1.4 var(--serif); }
+blockquote cite { font-style: normal; font-weight: 800; font-size: 14px; color: var(--cocoa); }
+
+/* map */
+.find { display: grid; grid-template-columns: .9fr 1.1fr; gap: 40px; align-items: center; }
+.mapcard { background: var(--paper); border: 1px solid var(--line); border-radius: 30px; padding: 16px; box-shadow: 0 20px 40px rgba(43,29,20,.08); }
+.mapcard svg { width: 100%; height: auto; display: block; border-radius: 20px; }
+.lines { display: grid; gap: 10px; margin: 18px 0 24px; font-size: 17px; }
+.lines b { color: var(--espresso); }
+
+footer { background: var(--espresso); color: #d9c7ae; padding-block: 44px 110px; margin-top: 40px; }
+footer .wrap { display: flex; justify-content: space-between; gap: 18px; flex-wrap: wrap; align-items: center; }
+footer .mark b { color: var(--cream); }
+footer .mark small { color: var(--honey); }
+
+.dock { position: fixed; left: 0; right: 0; bottom: 0; display: none; gap: 8px; padding: 10px max(14px, env(safe-area-inset-right, 0px)) calc(10px + env(safe-area-inset-bottom, 0px)) max(14px, env(safe-area-inset-left, 0px)); background: rgba(255,250,240,.95); backdrop-filter: blur(8px); border-top: 1px solid var(--line); z-index: 8; }
+.dock .btn { flex: 1; }
+
+@media (max-width: 960px) {
+  .hero-in, .room-grid, .lounge, .find { grid-template-columns: 1fr; }
+  .photo { max-width: 560px; }
+  .bookcard { grid-template-columns: 1fr 1fr; margin-inline: 14px; }
+  .bookcard .btn { grid-column: span 2; }
+  .quotes { grid-template-columns: 1fr; }
+  blockquote:nth-child(2) { transform: none; }
+  .lounge > div { padding: 40px 26px; }
+  .lounge img { min-height: 260px; }
+}
+@media (max-width: 760px) {
+  .pill nav { display: none; }
+  .pill { padding-left: 18px; }
+  .hero { padding-bottom: 54px; }
+  .hero-in { margin-top: 34px; }
+  section { padding-block: 64px; }
+  .dock { display: flex; }
+}
+@media (max-width: 480px) {
+  .bookcard { grid-template-columns: 1fr; }
+  .bookcard .btn { grid-column: auto; }
+  .amen { grid-template-columns: 1fr; }
+  .note { left: 8px; }
+  .pill .btn { padding: 12px 16px; font-size: 14px; }
+}
+</style>
+<style>body{margin:0}</style>
+</head>
+<body>
+
+<div class="demo">Demo website made for Charlie's Guest House. Prices and final details to be confirmed by you.</div>
+
+<div class="hero" id="top">
+  <div class="bg" aria-hidden="true"></div>
+  <div class="pill">
+    <a class="mark" href="#top" aria-label="Charlie's Guest House home"><b>Charlie<span>'</span>s</b><small>GUEST HOUSE</small></a>
+    <nav aria-label="Sections"><a href="#rooms">Rooms</a><a href="#lounge">Lounge</a><a href="#reviews">Reviews</a><a href="#find">Find us</a></nav>
+    <a class="btn" href="#book">Book a room</a>
+  </div>
+  <div class="hero-in">
+    <div>
+      <span class="badge"><i></i>Open 24 hours · Chantan, Accra</span>
+      <h1>Rest easy, <em>right</em> where you need to be.</h1>
+      <p>Neat, quiet and affordable rooms near Chantan Market, just minutes from Achimota Mall. Breakfast on request, free parking, and a team that's up 24/7.</p>
+      <div class="ctas">
+        <a class="btn gold" href="#book">Check your dates</a>
+        <a class="btn ghost" href="tel:+233204137091">Call 020 413 7091</a>
+      </div>
+      <div class="stars"><b>4.2</b> <i>★★★★★</i> &nbsp;51 reviews on Google</div>
+    </div>
+    <div class="photo">
+      <img src="img/room-gold.webp" alt="A Charlie's Guest House bedroom with golden curtains, air-conditioning and a wall TV" width="1126" height="960">
+      <div class="note"><b>8 rooms</b><span>each with AC, TV, fridge and microwave</span></div>
+    </div>
+  </div>
+</div>
+
+<form class="bookcard" id="book" aria-label="Book a room">
+  <label>Check-in<input type="date" name="in" required></label>
+  <label>Check-out<input type="date" name="out" required></label>
+  <label>Guests<select name="guests"><option>1 guest</option><option selected>2 guests</option><option>3 guests</option><option>4+ guests</option></select></label>
+  <button class="btn" type="submit">Send on WhatsApp</button>
+</form>
+<p class="small">We reply on WhatsApp with your rate and confirm your room.</p>
+
+<section id="rooms">
+  <div class="wrap">
+    <p class="eyebrow">In every room</p>
+    <h2>Small and <em>cosy</em>, with all you need.</h2>
+    <div class="room-grid">
+      <img src="img/room-night.webp" alt="Double bed with dark headboard, air-conditioner and a small rug" loading="lazy">
+      <div>
+        <div class="big8"><b>8</b><span>neatly dressed rooms, each one quiet</span></div>
+        <div class="amen">
+          <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 8h18M3 8v5h18V8M7 16l-1 3M12 16v3M17 16l1 3"/></svg>Air-conditioning</div>
+          <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="5" width="18" height="12" rx="2"/><path d="M8 21h8"/></svg>Flat-screen TV</div>
+          <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="6" y="2" width="12" height="20" rx="2"/><path d="M6 10h12M9 6v1M9 13v2"/></svg>Fridge</div>
+          <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="5" width="20" height="14" rx="2"/><rect x="5" y="8" width="10" height="8" rx="1"/><path d="M18 9v.5M18 12v.5"/></svg>Microwave</div>
+          <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 11h15a3 3 0 010 6H3zM6 11V7M10 11V5M14 11V8"/></svg>Breakfast on request</div>
+          <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="4"/><path d="M9 17V7h4a3 3 0 010 6H9"/></svg>Free parking</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="lounge" style="padding-top:0">
+  <div class="lounge">
+    <img src="img/lounge.webp" alt="Bright yellow guest lounge with black leather sofas and a TV" loading="lazy">
+    <div>
+      <p class="eyebrow" style="color:var(--honey)">The lounge</p>
+      <h2>A <em>bright</em> place to unwind.</h2>
+      <p>Catch the news, meet your visitors or just relax on the sofas. Our guests call it a cool, quiet environment in the middle of busy Accra.</p>
+      <ul>
+        <li>Quiet, peaceful compound</li>
+        <li>Staff on hand 24 hours a day</li>
+        <li>Easy to find, close to the main road</li>
+      </ul>
+      <a class="btn gold" href="#book">Book your stay</a>
+    </div>
+  </div>
+</section>
+
+<section id="reviews">
+  <div class="wrap">
+    <p class="eyebrow">What guests say</p>
+    <h2>4.2 stars from <em>51</em> guests.</h2>
+    <div class="quotes">
+      <blockquote><p>"Beautiful and decent place, rooms neatly dressed. Breakfast upon request at a minimal cost. Quiet environment."</p><cite>J.R. · Google review</cite></blockquote>
+      <blockquote><p>"They have a cool environment. Nice rooms and well situated, easy to locate."</p><cite>Emmanuel · Google review</cite></blockquote>
+      <blockquote><p>"Close to Chantan market. Rooms are quite affordable."</p><cite>De Gem · Google review</cite></blockquote>
+    </div>
+  </div>
+</section>
+
+<section id="find" style="padding-top:40px">
+  <div class="wrap find">
+    <div>
+      <p class="eyebrow">Find us</p>
+      <h2>Easy to <em>find</em>, easy to love.</h2>
+      <div class="lines">
+        <span>📍 Chantan, off Nii Okaiman West Main Road, Accra</span>
+        <span>🛒 Next to Chantan Market · minutes from Achimota Mall</span>
+        <span>📞 <b>020 413 7091</b> · open 24 hours</span>
+      </div>
+      <div class="ctas">
+        <a class="btn" href="https://www.google.com/maps/search/?api=1&query=Charlie%27s%20Guest%20house%20Chantan%20Accra" target="_blank" rel="noopener">Open in Google Maps</a>
+        <a class="btn ghost" href="tel:+233204137091">Call us</a>
+      </div>
+    </div>
+    <div class="mapcard">
+      <svg viewBox="0 0 560 380" role="img" aria-label="Simple map: Charlie's Guest House beside Chantan Market, off Nii Okaiman West Main Road, a short drive from Achimota Mall">
+        <rect width="560" height="380" fill="#fff6e3"/>
+        <g stroke="#f0dfbd" stroke-width="2"><path d="M0 60h560M0 140h560M0 230h560M0 320h560M90 0v380M210 0v380M330 0v380M450 0v380"/></g>
+        <path d="M-10 290 C 120 250, 240 230, 330 170 S 500 70, 580 40" fill="none" stroke="#f2b331" stroke-width="22" stroke-linecap="round"/>
+        <path d="M-10 290 C 120 250, 240 230, 330 170 S 500 70, 580 40" fill="none" stroke="#fff" stroke-width="2" stroke-dasharray="10 10"/>
+        <text x="370" y="168" font-family="Manrope, Arial" font-weight="800" font-size="12" fill="#5b4636" transform="rotate(-27 370 168)">NII OKAIMAN WEST MAIN RD</text>
+        <path d="M230 380 L 260 200" stroke="#ecd7ae" stroke-width="12" stroke-linecap="round"/>
+        <g transform="translate(150 250)"><rect x="-38" y="-24" width="76" height="48" rx="10" fill="#fff" stroke="#5b4636" stroke-width="2"/><text x="0" y="-3" text-anchor="middle" font-family="Manrope, Arial" font-weight="800" font-size="12" fill="#2b1d14">Chantan</text><text x="0" y="13" text-anchor="middle" font-family="Manrope, Arial" font-weight="700" font-size="11" fill="#7a6a5c">Market</text></g>
+        <g transform="translate(470 60)"><rect x="-56" y="-22" width="112" height="44" rx="10" fill="#fff" stroke="#5b4636" stroke-width="2"/><text x="0" y="-2" text-anchor="middle" font-family="Manrope, Arial" font-weight="800" font-size="12" fill="#2b1d14">To Achimota Mall</text><text x="0" y="13" text-anchor="middle" font-family="Manrope, Arial" font-weight="700" font-size="11" fill="#7a6a5c">a short drive →</text></g>
+        <g transform="translate(268 222)"><circle r="34" fill="#d6336c" opacity=".15"><animate attributeName="r" values="22;40;22" dur="2.6s" repeatCount="indefinite"/></circle><path d="M0 18 C -14 2, -20 -6, -20 -16 a20 20 0 0 1 40 0 c0 10 -6 18 -20 34z" fill="#d6336c"/><circle cy="-16" r="7" fill="#fff"/></g>
+        <g transform="translate(318 300)"><rect x="-10" y="-26" width="196" height="52" rx="14" fill="#2b1d14"/><text x="88" y="-4" text-anchor="middle" font-family="Fraunces, Georgia" font-style="italic" font-weight="600" font-size="17" fill="#f7d77a">Charlie's Guest House</text><text x="88" y="15" text-anchor="middle" font-family="Manrope, Arial" font-weight="700" font-size="11" fill="#e8d9c4">Open 24 hours · 020 413 7091</text></g>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<footer><div class="wrap"><a class="mark" href="#top"><b>Charlie<span>'</span>s</b><small>GUEST HOUSE</small></a><span>Chantan, Accra · 020 413 7091 · Open 24 hours</span></div></footer>
+
+<div class="dock">
+  <a class="btn" href="#book">Book a room</a>
+  <a class="btn ghost" href="tel:+233204137091">Call</a>
+</div>
+
+<script>
+(() => {
+  const f = document.getElementById('book');
+  const iso = d => d.toISOString().slice(0, 10);
+  f.in.min = iso(new Date()); f.out.min = f.in.min;
+  f.in.addEventListener('change', () => { f.out.min = f.in.value; if (f.out.value && f.out.value <= f.in.value) f.out.value = ''; });
+  const fmt = v => new Date(v + 'T00:00').toLocaleDateString('en-GB', { weekday: 'short', day: 'numeric', month: 'short' });
+  f.addEventListener('submit', e => {
+    e.preventDefault();
+    const n = Math.round((new Date(f.out.value) - new Date(f.in.value)) / 864e5);
+    let msg = "Hello Charlie's Guest House! I would like to book a room.\n\nCheck-in: " + fmt(f.in.value) + '\nCheck-out: ' + fmt(f.out.value);
+    if (n > 0) msg += ' (' + n + (n === 1 ? ' night' : ' nights') + ')';
+    msg += '\nGuests: ' + f.guests.value + '\n\nPlease send me the rate and availability. Thank you!';
+    window.open('https://wa.me/233204137091?text=' + encodeURIComponent(msg), '_blank', 'noopener');
+  });
+})();
+</script>
+
+</body>
+</html>
